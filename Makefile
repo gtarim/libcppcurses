@@ -1,16 +1,52 @@
-CXX = g++
-INCLUDES = -I./
-CXXFLAGS = $(INCLUDES) -lncurses -pedantic -std=c++11
-LDFLAGS =  
+########################################################################
+# Description:
+#  Makefile
+########################################################################
 
-SRC = examples/example_curses.cpp
-OBJ = $(SRC:.cc=.o)
-EXEC = example_curses
+ifneq ($TARGET),)
+CROSS_TARGET = $(TARGET)-
+endif
 
-all: $(EXEC)
+CC=$(CROSS_TARGET)gcc
+CXX=$(CROSS_TARGET)g++
 
-$(EXEC): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LBLIBS)
+# Name of the application
+OUTFILE = kman
 
+SRC = examples
+BUILD = build
+
+# List of object files
+OBJECTS = \
+	$(SRC)/example_curses.o
+
+INCLUDE	:=-I$(SYSROOT)/usr/include -I$(SYSROOT)/usr/local/include -I./
+
+ifneq ($(SYSROOT),)
+CFLAGS	:=--sysroot=$(SYSROOT) 
+endif
+
+INCLUDE +=-I$(SRC) -I$(SRC)/kman 
+LFLAGS 	=-lmenu -lcurses -lpthread
+CFLAGS 	+=$(INCLUDE) $(CROSS_CC_FLAGS)
+
+all: $(OUTFILE)
+
+$(OUTFILE): $(OBJECTS)
+	$(CXX) $(OBJECTS) -o $(BUILD)/$@ $(LFLAGS)
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+%.o: %.cpp
+	$(CXX) -c $(CFLAGS) $< -o $@
+
+%.o: $(SRC)/%.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+%.o: $(SRC)/%.cc
+	$(CXX) -c $(CFLAGS) $< -o $@
+
+.PHONY: clean
 clean:
-	rm -rf $(EXEC)
+	-rm $(SRC)/*.o $(BUILD)/*.map $(BUILD)/$(OUTFILE)

@@ -1,41 +1,33 @@
-#ifndef INCLUDE_CURSES
-#define INCLUDE_CURSES
+#pragma once
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <ncurses.h>
-
-// #include "common.hpp"
-// #include <menu.h>
-// #include <form.h>
+#include "common.hpp"
 
 class Curses
 {
 private:
-    // std::shared_ptr<WINDOW> window;
     int colsMax;
     int linesMax;
 public:
-    Curses(int _colsMax, int _linesMax) : colsMax {_colsMax}, linesMax {_linesMax}
+    Curses(int _colsMax, int _linesMax)
+    :   colsMax{_colsMax}, 
+        linesMax{_linesMax}
     {
         initscr();
-        noecho();
         cbreak();
-        keypad(stdscr, TRUE);
-    };
+        noecho();
+    }
 
-    int clear()
+    int clearWin()
     {
         return clear();
     }
     
-    int end()
+    int endWin()
     {
         return endwin();
     }
 
-    int refresh()
+    int refreshWin()
     {
         return refresh();
     }
@@ -54,8 +46,16 @@ public:
     {
         return init_pair(index, foreground, background);
     }
- 
+
+    void enableColor(int color, bool flag)
+    {
+        if(flag)
+        {
+            attron(COLOR_PAIR(color));
+        }
+        else
+        {
+            attroff(COLOR_PAIR(color));
+        }
+    }
 };
-
-
-#endif

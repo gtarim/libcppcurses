@@ -1,30 +1,34 @@
 #include <iostream>
 #include "curses/curses.hpp"
 
-#define MIN_COLS    40
-#define MIN_LINES   23
-
 int main(int argc, char const *argv[])
 {
 
     Curses curses { 40, 23 };
+    curses.startColor();
+    curses.initColor(1, COLOR_WHITE, COLOR_BLACK);
+    curses.initColor(1, COLOR_GREEN, COLOR_BLACK);
 
     if(!curses.isSizeFit())
     {
-        // curses.refresh();
+        curses.refreshWin();
+        curses.enableColor(0,true);
         printw("Curses size is should be greater then %dx%d",COLS,LINES);
+        curses.enableColor(0,false);
         getch();
-        curses.clear();
-        curses.end();
+        curses.clearWin();
+        curses.endWin();
     }
-    // else
-    // {
-    //     curses.refresh();
-    //     printw("Curses is fit");
-    //     getch();
-    //     curses.clear();
-    //     curses.end();
-    // }
+    else
+    {
+        curses.refreshWin();
+        curses.enableColor(1,true);
+        printw("Curses is fit");
+        curses.enableColor(1,false);
+        getch();
+        curses.clearWin();
+        curses.endWin();
+    }
 
     return 0;
 }
