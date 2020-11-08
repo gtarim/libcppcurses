@@ -15,3 +15,5 @@
 #include <mutex>
 #include <bits/stdc++.h> 
 #include <curses.h>
+#include <menu.h>
+#include <form.h>

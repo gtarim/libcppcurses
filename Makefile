@@ -18,7 +18,8 @@ BUILD = build
 
 # List of object files
 OBJECTS = \
-	$(SRC)/example_curses.o
+	$(SRC)/example_window_menu.o
+	# $(SRC)/example_curses.o
 
 INCLUDE	:=-I$(SYSROOT)/usr/include -I$(SYSROOT)/usr/local/include -I./
 

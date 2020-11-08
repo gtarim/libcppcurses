@@ -1,9 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <curses.h>
+#pragma once
 
+#include "common.hpp"
 
-namespace Curses
+namespace CursesUI
 {
     class Menu
     {

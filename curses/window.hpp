@@ -1,9 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <curses.h>
+#pragma once
 
-namespace Curses
+#include "common.hpp"
+
+namespace CursesUI
 {
     class Window
     {
@@ -21,13 +20,12 @@ namespace Curses
             window_ptr = std::make_shared<WINDOW*>(newwin(LINES/2, COLS, y, x));
         }
 
-        Window(int _x, int _y, int _width, int _height) 
+        Window(int _x, int _y, int _width, int _height) :
+         x{_x}, 
+         y{_y}, 
+         width{_width},
+         height{_height}
         {
-            x = _x;
-            y = _y;
-            width = _width;
-            height = _height;
-
             window_ptr = std::make_shared<WINDOW*>(newwin(height, width, y, x));
         }
 
