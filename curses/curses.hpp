@@ -5,18 +5,19 @@
 #include "curses.hpp"
 #include "window.hpp"
 #include "menu.hpp"
+#include "text.hpp"
 
 namespace CursesUI
 {
     class Curses
     {
     private:
-        int colsMax;
-        int linesMax;
+        int colsMin;
+        int linesMin;
     public:
-        Curses(int _colsMax, int _linesMax)
-        :   colsMax{_colsMax}, 
-            linesMax{_linesMax}
+        Curses(int _colsMin, int _linesMin)
+        :   colsMin{_colsMin}, 
+            linesMin{_linesMin}
         {
             initscr();
             cbreak();
@@ -40,7 +41,7 @@ namespace CursesUI
 
         bool isSizeFit()
         {
-            return ((COLS < colsMax) || (LINES < linesMax)) ? false : true;
+            return ((COLS < colsMin) || (LINES < linesMin)) ? false : true;
         }
 
         void startColor()
