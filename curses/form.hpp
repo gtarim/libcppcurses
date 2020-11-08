@@ -1,6 +1,6 @@
 #include <form.h>
 
-namespace Curses
+namespace CursesUI
 {
     class Form
     {

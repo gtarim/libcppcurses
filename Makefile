@@ -18,7 +18,8 @@ BUILD = build
 
 # List of object files
 OBJECTS = \
-	$(SRC)/example_text.o
+	$(SRC)/example_form.o
+	# $(SRC)/example_text.o
 	# $(SRC)/example_window_menu.o
 	# $(SRC)/example_curses.o
 
@@ -29,7 +30,7 @@ CFLAGS	:=--sysroot=$(SYSROOT)
 endif
 
 INCLUDE +=-I$(SRC) -I$(SRC)/kman 
-LFLAGS 	=-lmenu -lcurses -lpthread
+LFLAGS 	= -lform -lmenu -lcurses -lpthread
 CFLAGS 	+=$(INCLUDE) $(CROSS_CC_FLAGS)
 
 all: $(OUTFILE)

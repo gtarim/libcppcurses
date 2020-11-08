@@ -6,6 +6,7 @@
 #include "window.hpp"
 #include "menu.hpp"
 #include "text.hpp"
+#include "form.hpp"
 
 namespace CursesUI
 {
