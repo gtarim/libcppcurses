@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include "curses/curses.hpp"
 
@@ -18,17 +19,28 @@ int main(int argc, char const *argv[])
         getch();
         curses.clearWin();
         curses.endWin();
+        return -1;
     }
-    else
-    {
-        curses.refreshWin();
-        curses.enableColor(1,true);
-        printw("Curses is fit");
-        curses.enableColor(1,false);
-        getch();
-        curses.clearWin();
-        curses.endWin();
-    }
+    
+    CursesUI::Menu menu{};
+    CursesUI::Window menuWindow {0,0, COLS-2, LINES-2};
+    
+    // creting menu elements
+    std::vector<std::string> listMenu {"gokhantarim"};
+
+    menu.create(listMenu);
+
+    menuWindow.keypadEnable(true);
+    menuWindow.create(menu.getMenu());
+
+    curses.refreshWin();
+    menu.post();
+    menuWindow.refresh();
+
+    getch();
+    curses.clearWin();
+    curses.endWin();
+
 
     return 0;
 }
