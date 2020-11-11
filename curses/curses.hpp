@@ -7,6 +7,7 @@
 #include "menu.hpp"
 #include "text.hpp"
 #include "form.hpp"
+#include "panel.hpp"
 
 namespace CursesUI
 {
@@ -54,7 +55,7 @@ namespace CursesUI
         {
             return init_pair(index, foreground, background);
         }
-
+    
         void enableColor(int color, bool flag)
         {
             if(flag)
@@ -64,6 +65,42 @@ namespace CursesUI
             else
             {
                 attroff(COLOR_PAIR(color));
+            }
+        }
+
+        void enableBold(bool flag)
+        {
+            if(flag)
+            {
+                attron(A_BOLD);
+            }
+            else
+            {
+                attroff(A_BOLD);
+            }
+        }
+
+        void enableUnderline(bool flag)
+        {
+            if(flag)
+            {
+                attron(A_UNDERLINE);
+            }
+            else
+            {
+                attroff(A_UNDERLINE);
+            }
+        }
+
+        void enableItalic(bool flag)
+        {
+            if(flag)
+            {
+                attron(A_ITALIC);
+            }
+            else
+            {
+                attroff(A_ITALIC);
             }
         }
     };

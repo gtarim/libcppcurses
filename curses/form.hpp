@@ -9,6 +9,16 @@ namespace CursesUI
         FIELD *field[2];
     public:
         Form() = default;
+        
+        Form(int rows, int cols, int frow, int fcol, int nrows, int nbuf, chtype ch_type, Field_Options field_option)
+        {
+            field[0] = new_field(rows, cols, frow, fcol, nrows, nbuf);
+            field[1] = NULL;
+            set_field_back(field[0], ch_type); 
+            field_opts_off(field[0], field_option);
+
+            form_ptr = std::make_unique<FORM *>(new_form(field));   
+        }
 
         void create(int rows, int cols, int frow, int fcol, int nrows, int nbuf, chtype ch_type, Field_Options field_option)
         {

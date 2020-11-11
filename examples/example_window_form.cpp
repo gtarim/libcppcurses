@@ -25,9 +25,7 @@ int main(int argc, char const *argv[])
     }
 
     CursesUI::Window window {0 ,0, COLS, 3};
-    CursesUI::Form form {};
-    
-    form.create(1, COLS-4, 0, 1, 0, 0, A_UNDERLINE, O_STATIC );
+    CursesUI::Form form {1, COLS-4, 0, 1, 0, 0, A_UNDERLINE, O_STATIC };
 
     window.create(form.getForm());
 
@@ -38,16 +36,17 @@ int main(int argc, char const *argv[])
     window.refresh();
 
     int c;
-    while((c = getch()) != KEY_F(1))
+
+    while((c = wgetch(window.getWindow())) != KEY_F(1))
 	{
-        // std::cout << c << std::endl;
         switch(c)
 	    {
-        case KEY_DL : //KEY_DELETE
+        case KEY_DC : //KEY_DELETE
             form.driveForm(REQ_CLR_FIELD);
             break;
 
         case 127: // KEY_BACKSPACE
+        case KEY_BACKSPACE:
             form.driveForm(REQ_DEL_PREV);
             break;
 

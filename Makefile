@@ -11,14 +11,15 @@ CC=$(CROSS_TARGET)gcc
 CXX=$(CROSS_TARGET)g++
 
 # Name of the application
-OUTFILE = kman
+OUTFILE = example
 
 SRC = examples
 BUILD = build
 
 # List of object files
 OBJECTS = \
-	$(SRC)/example_form.o
+	$(SRC)/example_panel.o
+	# $(SRC)/example_window_form.o
 	# $(SRC)/example_text.o
 	# $(SRC)/example_window_menu.o
 	# $(SRC)/example_curses.o
@@ -30,7 +31,7 @@ CFLAGS	:=--sysroot=$(SYSROOT)
 endif
 
 INCLUDE +=-I$(SRC) -I$(SRC)/kman 
-LFLAGS 	= -lform -lmenu -lcurses -lpthread
+LFLAGS 	= -lpanel -lform -lmenu -lcurses -lpthread
 CFLAGS 	+=$(INCLUDE) $(CROSS_CC_FLAGS)
 
 all: $(OUTFILE)
